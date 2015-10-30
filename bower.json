@@ -1,0 +1,16 @@
+{
+  "name": "angular-bmy-channel",
+  "main": "channel.js",
+  "version": "0.0.0",
+  "authors": [
+    "bmy <mingming.bai@yahoo.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
