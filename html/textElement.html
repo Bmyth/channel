@@ -1,0 +1,26 @@
+<script type="text/ng-template" id="text_element.html">
+	<h1 ng-if="getType(element) == 'sectiontitle'" ng-class="{ghost:inEdit}" class="theme-color-basic" style="text-align:center; padding-top:25px; margin-bottom:25px; font-size:32px;">
+		{{text(element)}}
+	</h1>
+
+	<h3 ng-if="getType(element) == 'itemtitle'" ng-class="{ghost:inEdit}" class="theme-color-basic">
+		{{text(element)}}
+	</h3>
+
+	<p ng-if="getType(element) == 'text'" ng-class="{ghost:inEdit}">
+		{{text(element)}}
+	</p>
+
+	<p ng-if="getType(element) == 'description'" ng-class="{ghost:inEdit}">
+		{{text(element)}}
+	</p>
+
+	<p ng-if="getType(element) == 'icontext'" ng-class="{ghost:inEdit}">
+		<i class="fa {{getAttr(element,'iconValue')}} theme-color-bg text-icon" ng-if="getAttr(element,'iconType') == 'fontawesome'"></i>
+		{{text(element)}}
+	</p>
+
+	<a ng-href="{{getLink(element)}}" target="_blank" ng-if="getType(element) == 'linktext'" ng-class="{ghost:inEdit}">
+		{{text(element)}}
+	</a>	
+</script>

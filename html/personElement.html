@@ -1,0 +1,14 @@
+<script type="text/ng-template" id="person_element.html">
+    <div class="americano-element americano-person-element">
+        <div class="person-avatar" ng-if="mode !='publish'">
+            <img alt="" class="lazyOwl" data-ng-src="{{getThumbnail(element)}}">
+        </div>
+        <div class="person-avatar" ng-if="mode =='publish'">
+            <img alt="" class="lazyOwl" data-src="{{getThumbnail(element)}}">
+        </div>
+
+        <p class="name">{{getAttr(element, 'name')}}</p>
+        <p class="job">{{getAttr(element, 'jobTitle')}}</p>
+        <p class="company">{{getAttr(element, 'company')}}</p>
+    </div>
+</script>

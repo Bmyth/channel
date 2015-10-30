@@ -1,0 +1,107 @@
+<script type="text/ng-template" id="section_contacts_style.html">
+	#am-{{section.sectionId}}-section .am-qrcode-element{
+		max-width: 240px;
+		display: block;
+		margin: 0 auto 25px;
+	}
+	#am-{{section.sectionId}}-section .am-social-element{
+		width: 120px;
+		padding: 0 10px;
+	}
+</script>
+
+<script type="text/ng-template" id="section_host_style.html">
+	#am-{{section.sectionId}}-section .americano-division{
+		margin: 5px auto;
+	}
+	#am-{{section.sectionId}}-section .am-logo-element{
+		max-width: 200px;
+		margin: 0 6px;
+	}
+	#am-{{section.sectionId}}-section .am-copyright-element, #americano-{{section.sectionId}}-section .am-beian-element{
+		display: block;
+		width: 100%;
+		text-align: center;
+		font-size: 16px;
+	}
+	#am-{{section.sectionId}}-section .am-copyright-element p{
+		margin: 0;
+	}
+</script>
+
+<script type="text/ng-template" id="section_venues_style.html">
+	#am-{{section.sectionId}}-section .americano-division{
+		width: 100%;
+	}
+	#am-{{section.sectionId}}-section .americano-mainphoto-element{
+		width: 45%;
+	}
+	#am-{{section.sectionId}}-section .americano-html-element{
+		min-height: 80px;
+		width: 50%;
+		padding: 0 10px;
+		text-align: justify;
+	}
+	#am-{{section.sectionId}}-section .americano-photo-element{
+		width: 24.5%;
+	}
+	@media (max-width: 768px){
+		#am-{{section.sectionId}}-section .americano-mainphoto-element{
+			width: 100%;
+		}
+		#am-{{section.sectionId}}-section .americano-html-element{
+			width: 100%;
+		}
+		#am-{{section.sectionId}}-section .americano-photo-element{
+			width: 49.5%;
+		}
+	}
+</script>
+
+<script type="text/ng-template" id="section_tickets_style.html">
+	#am-{{section.sectionId}}-section .ticket-container{
+		width: 100%;
+		max-width: 240px;
+		margin: 0 auto 15px;
+		border: 1px solid {{theme.mainColor}}; 
+		padding: 0;
+	}
+	#am-{{section.sectionId}}-section .ticket-head{
+		background: {{theme.mainColor}};
+		color: #fff;
+	}
+	#am-{{section.sectionId}}-section .am-ticket-name{
+		font-size: 18px;
+		padding-top: 10px;
+	} 
+	#am-{{section.sectionId}}-section .am-ticket-price{
+		font-size: 18px; 
+		height: 25px; 
+		font-weight: bold;
+	} 
+	#am-{{section.sectionId}}-section .am-ticket-prefix-sale{
+		font-size: 12px; 
+		margin: 0 0 5px;
+	}
+	#am-{{section.sectionId}}-section .am-ticket-date{
+		font-size: 12px; 
+		margin: 0 0 5px;
+	}
+	#am-{{section.sectionId}}-section .am-ticket-description{
+		font-size: 14px; 
+		line-height: 1.2; 
+		text-align: justify; 
+		color: #666; 
+		font-weight: normal;
+		height: 240px;
+		padding: 5px;
+	}
+	#am-{{section.sectionId}}-section .am-ticket-register{
+		background: {{theme.mainColor}};
+		margin: 5px;
+	}
+	#am-{{section.sectionId}}-section .am-ticket-register a{
+		color: #fff;
+		padding: 10px;
+	}
+</script>

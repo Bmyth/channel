@@ -1,0 +1,139 @@
+<script type="text/ng-template" id="section.html">
+    <div class="scrollDataAttr template-component americano-section am-{{getAttr(section, 'width')}}-width
+        am-{{getAttr(section, 'textAlign')}}-textalign"
+        id="am-{{section.sectionId}}-section" 
+        data-scroll-index="{{sectionIndex}}">
+    	<div class="americano-section-container">
+    		<textElement element="titleElement" mode="renderMode" ng-if="titleElement"></textElement>
+    		<section section="section" mode="renderMode" theme='theme' engineer="engineerMode">
+            </section>
+    	</div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="section_content.html">
+    <div class="divisions-container"></div>
+
+    <div class="section-style-container"></div>
+
+    <div ng-include="'section_edit_panel.html'" ng-if="mode == 'edit'"></div>
+</script>
+
+<script type="text/ng-template" id="sectionConfigureModal">
+    <div class="section-configure-modal">
+        <div class="modal-header">
+            <h4 class="modal-title">模块设置</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <span>title</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="attrs.title">
+                      <span class="input-group-addon save" ng-click="setAttr('title', attrs.title)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <p>样式设置（请参考CSS语法）</p>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>width</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default" data-ng-click="setAttr('width', 'full')" ng-class="{picked: attrs.width == '100%'}">full</button>
+                      <button type="button" class="btn btn-default" data-ng-click="setAttr('width', '1000')" ng-class="{picked: attrs.width == '1000'}">1000</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>textAlign</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default" data-ng-click="setAttr('textAlign', 'left')" ng-class="{picked: attrs.textAlign == 'left'}">left</button>
+                      <button type="button" class="btn btn-default" data-ng-click="setAttr('textAlign', 'center')" ng-class="{picked: attrs.textAlign == 'center'}">center</button>
+                      <button type="button" class="btn btn-default" data-ng-click="setAttr('textAlign', 'right')" ng-class="{picked: attrs.textAlign == 'right'}">right</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>carousel</span>
+                </div>
+                <div class="col-md-10">
+                    <label class="switch">
+                        <input type="checkbox" data-ng-click="toggleAttr('carousel')" data-ng-checked="attrs.carousel">
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>carousel number</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="attrs.carouselNumber">
+                      <span class="input-group-addon save" ng-click="setAttr('carouselNumber', attrs.carouselNumber)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>background</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="attrs.background">
+                      <span class="input-group-addon save" ng-click="setAttr('background', attrs.background)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="section_edit_panel.html">
+    <div class="section-edit-panel">
+        <p class="badge section-hover-edit" ng-click="toggleDivisionPickPanel();" ng-if="!getAttr(section, 'eventSyncKey')">
+            <i class="fa fa-plus"></i>
+        </p>
+        <p class="badge section-hover-edit" ng-if="getAttr(section, 'eventSyncKey')" ng-click="syncData(section);">
+            <i class="fa fa-refresh"></i>
+        </p>
+        <p class="badge section-hover-edit" ng-click="openSectionConfigurePanel()">
+            <i class="fa fa-cog"></i>
+        </p>
+        <p class="badge section-hover-edit" ng-if="engineer" ng-click="toggleCssEditPanel()">css</p>
+        <p class="badge section-hover-edit" ng-if="engineer" ng-click="toggleJsonEditPanel()">json</p>
+    </div>
+
+    <div class="element-pick-panel" collapse="!divisionPick">
+        <p ng-click="addDivision('sample');" ng-if="sampleDivision">sample</p>
+        <p ng-click="addDivision('w100');" ng-if="!sampleDivision">宽度 100%</p>
+        <p ng-click="addDivision('w50');" ng-if="!sampleDivision">宽度 50%</p>
+        <p ng-click="addDivision('w25');" ng-if="!sampleDivision">宽度 25%</p>
+    </div>
+
+    <div class="css-editor-container" collapse="!showCssEditPanel" style="overflow:hidden;">
+        <textarea rows="20" style="width:100%;" data-ng-model="attrs.css"></textarea>
+        <p ng-click="saveCss(attrs.css);" class="opt-btn">保存css</p>
+    </div>
+
+    <div class="css-editor-container" collapse="!showJsonEditPanel" style="overflow:hidden;">
+        <textarea rows="20" style="width:100%;" data-ng-model="attrs.json"></textarea>
+        <p ng-click="saveJson(attrs.json);" class="opt-btn">保存json</p>
+    </div>
+</script>

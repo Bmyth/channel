@@ -1,0 +1,53 @@
+<script type="text/ng-template" id="inline_section_style.html">
+	#am-{{section.sectionId}}-section .divisions-container{
+		width: {{attrs.width}};
+	}
+	#am-{{section.sectionId}}-section{
+		background: {{attrs.background}};
+	}
+</script>
+
+<script type="text/ng-template" id="inline_division_style.html">
+	#am-{{division.divisionId}}-division{
+		width: {{divisionAttrs.width}};
+		text-align: {{divisionAttrs.textAlign}};
+		background: {{divisionAttrs.background}};
+	}
+
+	@media (max-width: 1000px){
+		#am-{{division.divisionId}}-division{
+			width: {{divisionAttrs.widthTablet}};
+		}
+	}
+
+	@media (max-width: 768px){
+		#am-{{division.divisionId}}-division{
+			width: {{divisionAttrs.widthMobile}};
+		}
+	}
+</script>
+
+<script type="text/ng-template" id="inline_element_style.html">
+	#am-{{element.elementId}}-element{
+		width: {{attrs.width}};
+		text-align: {{attrs.textAlign}};
+		color: {{attrs.color}};
+		font-size: {{attrs.fontSize}};
+		background: {{attrs.background}};
+	}
+	#am-{{element.elementId}}-element a, #am-{{element.elementId}}-element p{
+		color: {{attrs.color}};
+	}
+
+	@media (max-width: 1000px){
+		#am-{{element.elementId}}-element{
+			width: {{attrs.widthTablet}};
+		}
+	}
+
+	@media (max-width: 768px){
+		#am-{{element.elementId}}-element{
+			width: {{attrs.widthMobile}};
+		}
+	}
+</script>

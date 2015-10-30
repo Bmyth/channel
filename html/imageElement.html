@@ -1,0 +1,14 @@
+<script type="text/ng-template" id="image_element.html">
+		<a href="{{getLink(element)}}" target="_blank" ng-if="getLink(element)">
+			<img ng-src="{{getSrcUri(element)}}" class="image-item">
+			<p ng-if="getAttr(element, 'description')" class="image-description">
+				{{getAttr(element, 'description')}}
+			</p>
+		</a>
+		<a href="javascript:;" target="_blank" ng-if="!getLink(element)">
+			<img ng-src="{{getSrcUri(element)}}" class="image-item">
+			<p ng-if="getAttr(element, 'description')" class="image-description">
+				{{getAttr(element, 'description')}}
+			</p>
+		</a>
+</script>

@@ -1,0 +1,144 @@
+<script type="text/ng-template" id="division.html">
+	<div class="americano-division" ng-class="{editable:mode == 'edit'}" id="am-{{division.divisionId}}-division">
+	</div>
+</script>
+
+<script type="text/ng-template" id="general_division.html">
+	<p class="division-title theme-color-basic" ng-if="divisionAttrs.title">{{divisionAttrs.title}}</p>
+	<div class="division-container">
+		<element ng-repeat="element in division.elements" element="element" division="division" mode="mode" idx="$index"></element>
+	</div>
+
+    <div class="style-container"></div>
+
+	<div class="division-edit-panel" ng-if="mode == 'edit'" ng-show="!elementPick">
+		<p class="badge" ng-click="toggleElementPickPanel();" ng-if="getAttr(division, 'insertNew') != 'no'">
+			<i class="fa fa-plus"></i>
+		</p>
+		<p class="badge" ng-click="edit()" ng-if="getAttr(division, 'editable') != 'no'">
+			<i class="fa fa-cog" ></i>
+		</p>
+		<p class="badge" ng-click="deleteDivision(division)" ng-if="getAttr(division, 'deletable') != 'no'">
+			<i class="fa fa-times" ></i>
+		</p>
+	</div>
+
+    <div class="element-pick-panel" collapse="!elementPick">
+        <p ng-click="addElement('text');"><i class="fa fa-font"></i></p>
+        <p ng-click="addElement('image');"><i class="fa fa-picture-o"></i></p>
+        <p ng-click="addElement('richtext');"><i class="fa fa-italic"></i></p>
+        <p ng-click="addElement('html');"><i class="fa fa-code"></i></p>
+        <p ng-click="addElement('media');"><i class="fa fa-music"></i></p>
+        <p ng-click="toggleElementPickPanel();"><i class="fa fa-arrow-right"></i></p>
+    </div>
+</script>
+
+<script type="text/ng-template" id="divisionConfigureModal">
+    <div class="division-configure-modal">
+        <div class="modal-header">
+            <h4 class="modal-title">模块设置</h4>
+        </div>
+        <div class="modal-body">
+        	<div class="row">
+                <div class="col-md-2">
+                    <span>title</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                    	<input type="text" class="form-control" data-ng-model="divisionAttrs.title">
+                    	<span class="input-group-addon save" ng-click="setDivisionAttr('title', divisionAttrs.title, $event)"><i class="fa fa-floppy-o"></i></span> 
+                  	</div>
+                </div>
+            </div>
+
+            <hr>
+            <p>样式设置（请参考CSS语法）</p>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>width</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="divisionAttrs.width">
+                      <span class="input-group-addon save" ng-click="setDivisionAttr('width', divisionAttrs.width, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>width(tablet)</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="divisionAttrs.widthTablet">
+                      <span class="input-group-addon save" ng-click="setDivisionAttr('widthTablet', divisionAttrs.widthTablet, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>width(mobile)</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="divisionAttrs.widthMobile">
+                      <span class="input-group-addon save" ng-click="setDivisionAttr('widthMobile', divisionAttrs.widthMobile, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>textAlign</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default" data-ng-click="setDivisionAttr('textAlign', 'left', $event)" ng-class="{picked:divisionAttrs.textAlign == 'left'}">left</button>
+                      <button type="button" class="btn btn-default" data-ng-click="setDivisionAttr('textAlign', 'center', $event)" ng-class="{picked:divisionAttrs.textAlign == 'center'}">center</button>
+                      <button type="button" class="btn btn-default" data-ng-click="setDivisionAttr('textAlign', 'right', $event)" ng-class="{picked:divisionAttrs.textAlign == 'right'}">right</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>carousel</span>
+                </div>
+                <div class="col-md-10">
+                    <label class="switch">
+                        <input type="checkbox" data-ng-click="toggleDivisionAttr('carousel')" data-ng-checked="divisionAttrs.carousel">
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>carousel number</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="divisionAttrs.carouselNumber">
+                      <span class="input-group-addon save" ng-click="setDivisionAttr('carouselNumber', divisionAttrs.carouselNumber, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>background</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="divisionAttrs.background">
+                      <span class="input-group-addon save" ng-click="setDivisionAttr('background', divisionAttrs.background, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</script>

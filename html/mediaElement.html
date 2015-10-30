@@ -1,0 +1,49 @@
+<script type="text/ng-template" id="media_audio_element.html">
+	<div class="media-play-container">
+		<audio media-player="mediaPlayer" data-playlist="playlist"></audio>
+
+  		<div class="progress" ng-click="mediaPlayer.seek(mediaPlayer.duration * seekPercentage($event))">
+			<div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{ width: mediaPlayer.currentTime*100/mediaPlayer.duration + '%' }"></div>
+		</div>
+
+		<div class="player-control">
+			<div class="time" ng-show="mediaPlayer.formatTime">
+		      <span class="ng-binding">{{mediaPlayer.formatTime}}</span><b>/</b><span class="ng-binding">{{mediaPlayer.formatDuration}}</span>
+		    </div>
+			<div class="btn" ng-click="mediaPlayer.playPause()">
+				<i class="fa fa-play" ng-class="{ 'fa-pause': mediaPlayer.playing, 'fa-play': !mediaPlayer.playing }"></i>
+			</div>
+			<div class="btn" ng-click="mediaPlayer.setVolume(mediaPlayer.volume - 0.1)">
+				<span><i class="fa fa-volume-down"></i></span>
+			</div>
+			<div class="btn" ng-click="mediaPlayer.setVolume(mediaPlayer.volume + 0.1)">
+				<span><i class="fa fa-volume-up"></i></span>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="media_video_element.html">
+	<div class="media-play-container">
+		<video media-player="mediaPlayer" data-playlist="playlist"></video>
+
+  		<div class="progress" ng-click="mediaPlayer.seek(mediaPlayer.duration * seekPercentage($event))">
+			<div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{ width: mediaPlayer.currentTime*100/mediaPlayer.duration + '%' }"></div>
+		</div>
+
+		<div class="player-control">
+			<div class="time" ng-show="mediaPlayer.formatTime">
+		      <span class="ng-binding">{{mediaPlayer.formatTime}}</span><b>/</b><span class="ng-binding">{{mediaPlayer.formatDuration}}</span>
+		    </div>
+			<div class="btn" ng-click="mediaPlayer.playPause()">
+				<i class="fa fa-play" ng-class="{ 'fa-pause': mediaPlayer.playing, 'fa-play': !mediaPlayer.playing }"></i>
+			</div>
+			<div class="btn" ng-click="mediaPlayer.setVolume(mediaPlayer.volume - 0.1)">
+				<span><i class="fa fa-volume-down"></i></span>
+			</div>
+			<div class="btn" ng-click="mediaPlayer.setVolume(mediaPlayer.volume + 0.1)">
+				<span><i class="fa fa-volume-up"></i></span>
+			</div>
+		</div>
+	</div>
+</script>

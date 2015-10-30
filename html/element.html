@@ -1,0 +1,228 @@
+<script type="text/ng-template" id="element.html">
+	<element element="element" division="division" mode="mode">
+	</element>
+</script>
+
+<script type="text/ng-template" id="element_container.html">
+	<div class="americano-element
+		am-{{attrs.type}}-element 
+		am-{{attrs.category}}-element
+		am-{{idx}}-element" 
+		ng-class="{editable: editMode}"
+		id="am-{{element.elementId}}-element">
+
+		<div class="style-container"></div>
+
+		<div class="element-edit-panel" ng-if="editMode">
+			<p class="badge" ng-click="edit()" ng-if="getAttr(element, 'editable') != 'no'">
+				<i class="fa fa-pencil edit"></i>
+			</p>
+			<p class="badge" ng-click="delete(element)" ng-if="getAttr(element, 'deletable') != 'no'">
+				<i class="fa fa-times delete"></i>
+			</p>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="elementEditModal">
+	<div class="element-edit-modal">
+        <div class="modal-head" style="position: relative;height: 20px;">
+            <p class="uploading-msg" ng-bind="notifyMsg"></p>
+        </div>
+        <div class="modal-body">
+        	<div ng-if="elementType == 'image'">
+        		<div class="image-sample row" id="image-sample-container">
+					<img ng-src="{{attrs.value}}">
+					<p class="opt-btn upload" id="image-upload" style
+                    ="position: absolute; right: 0;bottom: 0;">本地上传</p>
+				</div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <span>图片地址</span>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" data-ng-model="attrs.value">
+                        <span class="opt-btn save" ng-click="setValue(attrs.value, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+				<div class="row">
+	                <div class="col-md-2">
+	                    <span>链接Url</span>
+	                </div>
+	                <div class="col-md-10">
+                    	<input type="text" class="form-control" data-ng-model="attrs.linkUrl">
+                    	<span class="opt-btn save" ng-click="setAttr('linkUrl', attrs.linkUrl, $event)"><i class="fa fa-floppy-o"></i></span> 
+	                </div>
+	            </div>
+        	</div>
+
+            <div ng-if="elementType == 'text'">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span>编辑文本</span>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" data-ng-model="attrs.value" ng-if="attrs.type != 'description'">
+                        <textarea type="text" class="form-control" data-ng-model="attrs.value" ng-if="attrs.type == 'description'" rows="5"></textarea>
+                        <span class="opt-btn save" ng-click="setValue(attrs.value, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <span>链接Url</span>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" data-ng-model="attrs.linkUrl">
+                        <span class="opt-btn save" ng-click="setAttr('linkUrl', attrs.linkUrl, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="elementType == 'richtext'">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span>编辑内容</span>
+                    </div>
+                    <div class="col-md-10">
+                        <textarea ckeditor class="form-control" ng-model="attrs.value" rows="5" style="width:100 !important;"></textarea>
+                        <span class="opt-btn save" ng-click="setValue(attrs.value, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="elementType == 'html'">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span>编辑内容</span>
+                    </div>
+                    <div class="col-md-10">
+                        <textarea class="form-control" ng-model="attrs.value" rows="10" style="width:100 !important;"></textarea>
+                        <span class="opt-btn save" ng-click="setValue(attrs.value, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="elementType == 'media'">
+                <p>媒体文件</p>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="row" id="media-sample-container" style="height:30px;">
+                            <div class="col-md-0">
+                                <img ng-src="{{attrs.value}}" style="display:none;">
+                            </div>
+                            <div class="col-md-12">
+                                <p class="opt-btn" id="media-upload">本地上传</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" data-ng-model="attrs.value">
+                            <span class="input-group-addon save" ng-click="setValue(attrs.value, $event)"><i class="fa fa-floppy-o"></i></span> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <span>类型</span>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-default" data-ng-click="setAttr('mediaType', 'audio', $event)" ng-class="{picked:attrs.mediaType == 'audio'}">音频</button>
+                          <button type="button" class="btn btn-default" data-ng-click="setAttr('mediaType', 'video', $event)" ng-class="{picked:attrs.mediaType == 'video'}">视频</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <p>样式设置（请参考CSS语法）</p>
+            
+            <div class="row">
+                <div class="col-md-2">
+                    <span>width</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="attrs.width">
+                      <span class="input-group-addon save" ng-click="setAttr('width', attrs.width, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>width(tablet)</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="attrs.widthTablet">
+                      <span class="input-group-addon save" ng-click="setAttr('widthTablet', attrs.widthTablet, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>width(mobile)</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="attrs.widthMobile">
+                      <span class="input-group-addon save" ng-click="setAttr('widthMobile', attrs.widthMobile, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>textAlign</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default" data-ng-click="setAttr('textAlign', 'left', $event)" ng-class="{picked:attrs.textAlign == 'left'}">left</button>
+                      <button type="button" class="btn btn-default" data-ng-click="setAttr('textAlign', 'center', $event)" ng-class="{picked:attrs.textAlign == 'center'}">center</button>
+                      <button type="button" class="btn btn-default" data-ng-click="setAttr('textAlign', 'right', $event)" ng-class="{picked:attrs.textAlign == 'right'}">right</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>color</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="attrs.color">
+                      <span class="input-group-addon save" ng-click="setAttr('color', attrs.color, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>fontSize</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="attrs.fontSize">
+                      <span class="input-group-addon save" ng-click="setAttr('fontSize', attrs.fontSize, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <span>background</span>
+                </div>
+                <div class="col-md-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" data-ng-model="attrs.background">
+                      <span class="input-group-addon save" ng-click="setAttr('background', attrs.background, $event)"><i class="fa fa-floppy-o"></i></span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

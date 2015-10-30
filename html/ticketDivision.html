@@ -1,0 +1,18 @@
+<script type="text/ng-template" id="ticket_division.html">
+	<div class="ticket-container">
+		<div class="ticket-head">
+			<p class="am-ticket-name">{{content.name}}</p>
+			<p class="am-ticket-price">{{priceText}}</p>
+			<p class="am-ticket-prefix-sale">{{prefixSale}}</p>
+			<p class="am-ticket-date">{{saleDate}}</p>
+		</div>
+		<div class="am-ticket-description"><description></div>
+		<div class="am-ticket-register">
+		    <a class="btn" target="_blank" href="{{registerUrl}}">
+		        <span style="white-space: normal; word-break: break-word;">
+		            {{registerText}}
+		        </span>
+		    </a>
+		</div>
+	</div>
+</script>

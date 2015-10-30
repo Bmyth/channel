@@ -1,0 +1,27 @@
+<script type="text/ng-template" id="agenda_section.html">
+    <div class="americano-agenda-section americano-section template-component" data-scroll-index="{{sectionIndex}}">
+    	<div class="americano-section-container">
+            <textElement element="titleElement" mode="renderMode"></textElement>
+    		<agendaSection section="section" mode="renderMode">	
+    		</agendaSection>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="agenda_nav.html">
+    <div class="nav-text nav-item theme-color-bg">
+        <p>{{nav.text}}</p>
+    </div>
+</script>
+<script type="text/ng-template" id="agenda_content.html">
+    <div class="content-item">
+    	<div class="side-container">
+	       <div class="toggle-item" data-ng-repeat="collapse in content.collapse">
+	            <a class="collapse-top-toggle bg-{{color}} collapse-side-toggle" data-toggle="collapse" href="#collapse-{{content.idx}}-{{collapse.idx}}" data-ng-class="{active: collapse.idx == 0}" data-parent="#accordion-{{content.idx}}">
+	                {{collapse.toggle}}
+	            </a>
+	        </div>
+    	</div>
+        <div class="collapse-container" ng-model="content" ng-include="'collapse_component.html'">
+        </div>
+    </div>
+</script>
