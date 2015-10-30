@@ -1,6 +1,6 @@
 {
   "name": "angular-bmy-channel",
-  "main": "channel.js",
+  "main": "js/channel.js",
   "version": "0.0.1",
   "authors": [
     "bmy <mingming.bai@yahoo.com>"
